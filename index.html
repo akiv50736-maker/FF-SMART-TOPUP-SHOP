@@ -1,0 +1,60 @@
+<option value="2530|1580">2530💎 - 1580 Tk</option>
+        <option value="5060|3160">5060💎 - 3160 Tk</option>
+        <option value="780|2500">আইডি কোড মান্থলি = 780 Tk (2500💎)</option>
+        <option value="160|445">আইডি কোড উইক্লি = 160 Tk (445💎)</option>
+        <option value="50|90">আইডি কোড উইক্লি লাইট = 50 Tk (90💎)</option>
+      </select>
+
+      <!-- Preview -->
+      <div id="preview">💰 দিতে হবে: 25 Tk | 💎 Diamonds: 25</div>
+
+      <label>পেমেন্ট মেথড:</label>
+      <input type="text" value="Bkash / Nagad" readonly>
+
+      <label>লেনদেন আইডি (TxnID):</label>
+      <input type="text" id="txnId" placeholder="TxnID দিন (বাধ্যতামূলক)" required>
+
+      <button type="submit">অর্ডার সাবমিট করুন</button>
+    </form>
+  </div>
+
+  <script>
+    function updatePreview(){
+      let pkg = document.getElementById("package").value.split('|');
+      let diamonds = pkg[0];
+      let price = pkg[1];
+      document.getElementById("preview").innerText = `💰 দিতে হবে: ${price} Tk | 💎 Diamonds: ${diamonds}`;
+    }
+
+    function sendWhatsApp(event){
+      event.preventDefault();
+
+      let gameId = document.getElementById("gameId").value;
+      let server = document.getElementById("server").value;
+      let pkg = document.getElementById("package").value.split('|');
+      let diamonds = pkg[0];
+      let price = pkg[1];
+      let txnId = document.getElementById("txnId").value;
+
+      if(!txnId){
+        alert("❌ দয়া করে ট্রানজেকশন আইডি (TxnID) দিন!");
+        return;
+      }
+
+      let phone = "8801569114870";
+
+      let msg = `নতুন অর্ডার ✅
+গেম আইডি: ${gameId}
+সার্ভার: ${server}
+প্যাকেজ: ${diamonds} Diamonds - ${price} Tk
+TxnID: ${txnId}`;
+
+      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, "_blank");
+      alert("✅ আপনার অর্ডার সাবমিট হয়েছে, WhatsApp ওপেন হয়েছে।");
+    }
+
+    // Initialize preview on page load
+    window.onload = updatePreview;
+  </script>
+</body>
+</html>
